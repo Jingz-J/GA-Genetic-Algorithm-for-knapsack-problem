@@ -121,19 +121,21 @@ if __name__ == '__main__':
     while n > 0:
         n -= 1
 
-        # 适应度计算 （若精度达到，跳出循环，得到最终结果）
+        # 适应度计算 
         fitnesses = fitness(chromosome_states)
         print('适应度:', fitnesses, '\n')
+        
+        # 若精度达到，提前跳出循环
         if is_finished(fitnesses):
             break  # 如果符合条件，立刻停止循环
         print('1:', fitnesses)
 
-        # 随机选择  （重量大于80的被淘汰）
+        # 淘汰重量大于80的，并随机选择下一步要进行交叉的个体  
         selected_index = filter(chromosome_states, fitnesses)
         print('2:', selected_index)
         print('chromosome_states_2:', chromosome_states)
 
-        # 产生下一代
+        # 交叉产生下一代
         chromosome_states = crossover(chromosome_states, selected_index)
         print('3:', chromosome_states)
         print(str(n) + '..................................\n\n\n')  # 迭代次数
